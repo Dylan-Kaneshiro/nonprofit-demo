@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+// npx json-server --watch data/db.json --port 8000
+
 const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
