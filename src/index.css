@@ -38,40 +38,75 @@
 
 
 /* blog home */
+.home {
+  margin-bottom:1000px;
+}
+
 img {
   margin-top: 40px;
   max-width:100%;
 }
 
-/* blog previews / list */
-.blog-list {
-  padding: 50px
+.home h1 {
+  padding: 50px 50px 20px 50px;
+  color: #46923c;
 }
 
-.blog-list h1{
-  color: #46923c;
+/* blog previews / list */
+.blog-list {
+  padding: 0px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .blog-preview {
-  padding: 10px 16px;
-  margin: 20px 0;
+  padding: 20px;
+  width: 250px;
+  height: 100px;
+  margin: 20px 0px;
 
+  border-style: solid;
+  border-radius: 15px;
+  border-color: #8bca84;
+
+  
 }
 .blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+  animation-name: bubble-expand;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
+
+@keyframes bubble-expand {
+  0%{
+    width: 250px;
+    height: 100px;
+  }
+  100%{
+    width: 300px;
+    height: 120px;
+    box-shadow: 2px 6px 10px rgba(0,0,0,0.1);
+  }
+}
+
 .blog-preview h2 {
   font-size: 20px;
   color: #46923c;
-  margin-bottom: 8px;
+  text-align: center;
 }
 
 .blog-preview p {
   color: #46923c;
+  text-align: center;
 }
 
 .blog-preview a{
   text-decoration: none;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 /* blog details page */

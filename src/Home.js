@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <div className="home">
       <img src="/images/breadfruit.png" alt="" />
+      <h1>Popular</h1>
       { error && <div>{ error }</div> }
       { isPending && <div>Loading...</div> }
       { blogs && <BlogList blogs={blogs} title="Popular"/> }

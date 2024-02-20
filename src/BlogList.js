@@ -5,8 +5,7 @@ const BlogList = ({blogs, title}) => {
     //const title = props.title;
     
     return ( 
-        <div className="blog-list">
-            <h1>{title}</h1>
+        <div className="blog-list"> 
             {blogs.map(blog => (
                 <div className="blog-preview" key={blog.id}>
                     <Link to={`/blogs/${blog.id}`}>
