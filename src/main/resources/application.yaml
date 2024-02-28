@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://utdcapstonedb.database.windows.net:1433;database=growing-tree;user=sqldbadmin@utdcapstonedb;password=Capstone12!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: sqldbadmin@utdcapstonedb
+    password: Capstone12!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    com.utdallas.capstone.*: debug
+    com.utdallas.capstone.mapper.*: debug;
