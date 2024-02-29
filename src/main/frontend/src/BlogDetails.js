@@ -4,12 +4,12 @@ import useFetch from "./useFetch";
 const BlogDetails = () => {
 
     const {id} = useParams();
-    const {data: blog, isPending, error} = useFetch('http://localhost:8080/blogs/' + id)
+    const {data: blog, isPending, error} = useFetch('http://localhost:8086/blogs/' + id)
     console.log("RETURNING BLOG DATA FROM COMPONENT", blog);
     const history = useHistory();
 
     const handleClick = () => {
-        fetch('http://localhost:8000/blogs/' + blog.id, {
+        fetch('http://localhost:8086/blogs/delete/' + blog.id, {
             method: 'DELETE'
         }).then(() => {
             history.push('/')

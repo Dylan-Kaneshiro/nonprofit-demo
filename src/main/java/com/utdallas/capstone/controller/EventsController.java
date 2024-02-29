@@ -1,31 +1,40 @@
 package com.utdallas.capstone.controller;
 
-import com.utdallas.capstone.service.EventsService;
+import com.utdallas.capstone.service.IEventsService;
 import com.utdallas.capstone.vo.EventsVO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @Slf4j
 public class EventsController {
 
-    @Autowired
-    private final EventsService eventsService;
+    private final IEventsService eventsService;
 
-    public EventsController(EventsService eventsService) {
+    public EventsController(IEventsService eventsService) {
         this.eventsService = eventsService;
     }
 
-    @GetMapping(value = "blogs/1")
-    public ResponseEntity<EventsVO> getAllEvents() {
+
+    @GetMapping(value = "blogs/list")
+    public ResponseEntity<List<EventsVO>> getEventList() {
+        List<EventsVO> eventList = eventsService.getEventList();
+        log.info("Fetched {} records for eventList: {}", eventList.size(), eventList);
+        return new ResponseEntity<>(eventList, HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "blogs/{blogId}")
+    public ResponseEntity<EventsVO> getEventDetails(@PathVariable int blogId)  {
         log.info("EventsController :: Getting list of all blogs");
-        EventsVO newEvent= eventsService.getEventDetails(1);
+        EventsVO newEvent= eventsService.getEventDetails(blogId);
         log.info("EventsController :: getAllEvents() -> Returning response {}", newEvent);
         return new ResponseEntity<>(newEvent, HttpStatus.OK);
     }
+
 
     @PostMapping(value = "blogs/add")
     public ResponseEntity<EventsVO> addEvent(@RequestBody EventsVO event) {
@@ -34,10 +43,13 @@ public class EventsController {
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
-    @GetMapping(value = "api/v1/newapi/{id}")
-    public ResponseEntity<String> randomMethod(@PathVariable int id) {
-        log.info("EventsController :: Printing id: {}", id);
-        return new ResponseEntity<>(new String("SJKLGJSKLG"), HttpStatus.OK);
+
+    @DeleteMapping(value = "blogs/delete/{eventId}")
+    public ResponseEntity<EventsVO> deleteEventRecord(@PathVariable int eventId) {
+        log.info("EventsController :: Calling eventsService to delete event with id: {}", eventId);
+        eventsService.deleteEvent(eventId);
+        return new ResponseEntity<>(new EventsVO(), HttpStatus.OK);
+
     }
 
 
