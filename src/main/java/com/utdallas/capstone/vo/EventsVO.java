@@ -1,5 +1,6 @@
 package com.utdallas.capstone.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class EventsVO {
 
     private String title;
+    @JsonProperty("body")
     private String description;
     private String author;
     private String address;

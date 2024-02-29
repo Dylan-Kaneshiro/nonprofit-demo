@@ -1,12 +1,13 @@
-package com.utdallas.capstone.dao;
+package com.utdallas.capstone.service;
 
 import com.utdallas.capstone.vo.EventsVO;
 
 import java.util.List;
 
-public interface IEventsDao {
+public interface IEventsService {
     EventsVO getEventDetails(int id);
-    boolean addEvent(EventsVO event);
     List<EventsVO> getEventList();
+
+    boolean addEvent(EventsVO event);
     boolean deleteEvent(int id);
 }
