@@ -2,12 +2,15 @@ package com.utdallas.capstone.controller;
 
 import com.utdallas.capstone.service.IEventsService;
 import com.utdallas.capstone.vo.EventsVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
+@Api
 @RestController
 @Slf4j
 public class EventsController {
@@ -19,6 +22,7 @@ public class EventsController {
     }
 
 
+    @ApiOperation(value = "Gets list of all active blogs")
     @GetMapping(value = "blogs/list")
     public ResponseEntity<List<EventsVO>> getEventList() {
         List<EventsVO> eventList = eventsService.getEventList();
@@ -27,8 +31,10 @@ public class EventsController {
     }
 
 
+    @ApiOperation("Gets details for a specific blog with the ID provided")
     @GetMapping(value = "blogs/{blogId}")
-    public ResponseEntity<EventsVO> getEventDetails(@PathVariable int blogId)  {
+    public ResponseEntity<EventsVO> getEventDetails(@ApiParam(value = "blogId", example = "1")
+                                                    @PathVariable int blogId)  {
         log.info("EventsController :: Getting list of all blogs");
         EventsVO newEvent= eventsService.getEventDetails(blogId);
         log.info("EventsController :: getAllEvents() -> Returning response {}", newEvent);
@@ -50,6 +56,17 @@ public class EventsController {
         eventsService.deleteEvent(eventId);
         return new ResponseEntity<>(new EventsVO(), HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "Gets filtered results based on events or organization")
+    @GetMapping(value = "blogs/search")
+    @ResponseBody
+    public ResponseEntity<List<EventsVO>> getFilteredEventsOnNameOrOrganization(
+           @ApiParam @RequestParam(name = "searchParam") String searchParam
+    ) {
+        log.info("EventsController :: Getting filtered results for search param: {}", searchParam);
+        List<EventsVO> eventList = eventsService.getFilteredEvents(searchParam);
+        return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
 

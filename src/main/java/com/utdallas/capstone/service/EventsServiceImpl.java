@@ -42,4 +42,15 @@ public class EventsServiceImpl implements IEventsService {
     public boolean deleteEvent(int id) {
         return eventsDao.deleteEvent(id);
     }
+
+    @Override
+    public List<EventsVO> getFilteredEvents(String searchParam) {
+        List<EventsVO> eventList = eventsDao.getEventsByName(searchParam);
+        if(!eventList.isEmpty()) {
+            return eventList;
+        } else {
+            eventList = eventsDao.getEventsByOrganization(searchParam);
+            return eventList;
+        }
+    }
 }

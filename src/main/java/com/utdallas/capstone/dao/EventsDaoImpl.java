@@ -39,4 +39,12 @@ public class EventsDaoImpl implements IEventsDao {
         int rowsAffected = eventsMapper.deleteEvent(id);
         return rowsAffected > 0;
     }
+
+    public List<EventsVO> getEventsByName(String searchParam) {
+        return eventsMapper.getEventsByName(searchParam);
+    }
+
+    public List<EventsVO> getEventsByOrganization(String searchParam) {
+        return eventsMapper.getEventsByOrganization(searchParam);
+    }
 }

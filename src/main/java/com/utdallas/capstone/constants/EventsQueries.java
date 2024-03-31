@@ -10,9 +10,13 @@ public class EventsQueries {
             "(title, description, phone, author, address, email, event_status)\n" +
             "VALUES (#{title}, #{description}, #{phone}, #{author}, #{address}, #{email}, 'A')";
 
-    public final static String GET_EVENT_LIST = "SELECT * FROM EVENTS where event_status = 'A'";
+    public final static String GET_EVENT_LIST = "SELECT id, title, author FROM EVENTS where event_status = 'A'";
 
     public final static String REMOVE_EVENTS = "UPDATE events \n"
             + "SET event_status = 'I'\n" +
             "WHERE id = #{id}";
+
+    public final static String GET_EVENTS_BY_NAME = "SELECT * FROM EVENTS WHERE title LIKE '%${searchParam}%'";
+
+    public final static String GET_EVENTS_BY_ORGANIZATION = "SELECT * FROM EVENTS WHERE author LIKE '%${searchParam}%'";
 }
