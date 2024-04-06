@@ -17,10 +17,10 @@ const Home = () => {
   return (
     <div className="home">
       <img src="/images/breadfruit.png" alt="" />
-      <h1>Popular</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} class="search-bar-wrapper">
         <input 
+          class="search"
           type="text"
           value={tempSearchTerm}
           onChange={(e) => setTempSearchTerm(e.target.value)}
