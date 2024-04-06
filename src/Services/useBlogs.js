@@ -1,11 +1,7 @@
 import useFetch from "../useFetch";
 
-const useBlogs = () => {
-    return useFetch('http://localhost:8000/blogs')
-}
-
-const blogIDToURL = (id) => {
-    return `/blogs/${id}`
+const useBlogs = (searchTerm) => {
+    return useFetch(`http://localhost:8000/blogs/${searchTerm}`)
 }
 
 export default useBlogs;

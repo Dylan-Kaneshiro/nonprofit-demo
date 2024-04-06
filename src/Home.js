@@ -2,7 +2,7 @@ import BlogList from "./BlogList";
 import useBlogs from "./Services/useBlogs";
 
 const Home = () => {
-  const { error, isPending, data: blogs } = useBlogs()
+  const { error, isPending, data: blogs } = useBlogs("")
 
   return (
     <div className="home">
