@@ -16,7 +16,8 @@ public class EventsQueries {
             + "SET event_status = 'I'\n" +
             "WHERE id = #{id}";
 
-    public final static String GET_EVENTS_BY_NAME = "SELECT * FROM EVENTS WHERE title LIKE '%${searchParam}%'";
+    public final static String GET_EVENTS_BY_NAME = "SELECT * FROM EVENTS WHERE title LIKE '%${searchParam}%' " +
+            "and event_status = 'A'";
 
     public final static String GET_EVENTS_BY_ORGANIZATION = "SELECT * FROM EVENTS WHERE author LIKE '%${searchParam}%'";
 }

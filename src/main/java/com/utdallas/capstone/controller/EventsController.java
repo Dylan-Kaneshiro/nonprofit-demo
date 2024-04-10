@@ -62,10 +62,15 @@ public class EventsController {
     @GetMapping(value = "blogs/search")
     @ResponseBody
     public ResponseEntity<List<EventsVO>> getFilteredEventsOnNameOrOrganization(
-           @ApiParam @RequestParam(name = "searchParam") String searchParam
+           @ApiParam @RequestParam(name = "searchParam", required = false) String searchParam
     ) {
         log.info("EventsController :: Getting filtered results for search param: {}", searchParam);
-        List<EventsVO> eventList = eventsService.getFilteredEvents(searchParam);
+        List<EventsVO> eventList;
+        if(searchParam == null) {
+            eventList = eventsService.getEventList();
+        } else {
+            eventList = eventsService.getFilteredEvents(searchParam);
+        }
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
