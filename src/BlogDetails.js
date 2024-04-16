@@ -1,6 +1,7 @@
 import { useParams, useHistory } from "react-router-dom";
 import useFetch from "./useFetch";
 import blogIDToURL from "./Services/blogIDToURL";
+import donationURL from "./Services/donationURL";
 import { useState } from 'react';
 
 const BlogDetails = () => {
@@ -8,7 +9,8 @@ const BlogDetails = () => {
     const { id } = useParams();
     const { data: blog, isPending, error } = useFetch(blogIDToURL(id))
     const history = useHistory();
-    const [donationInfo, setDonationInfo] = useState({amount:'', cardNumber: '', cardHolder: '', expiryDate: '', cvv: ''});
+    const [donationInfo, setDonationInfo] = useState({amount:'', cardNumber: '', cardHolder: '', expiryDate: '', cvv: '', blogID: id});
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClick = () => {
         fetch(blogIDToURL(blog.id), {
@@ -24,7 +26,19 @@ const BlogDetails = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        // Process the donation here
+        setIsLoading(true);
+        
+
+        fetch(donationURL(), {
+            method: 'POST',
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(donationInfo)
+        }).then(() => {
+            console.log('new donation added');
+            setIsLoading(false);
+            //history.go(-1);
+            history.push('/');
+        })
     }
 
     return ( 
@@ -68,6 +82,7 @@ const BlogDetails = () => {
             <p>{donationInfo['cardHolder']}</p>
             <p>{donationInfo['expiryDate']}</p>
             <p>{donationInfo['cvv']}</p>
+            <p>{donationInfo['blogID']}</p>
         </div>
      );
 }
