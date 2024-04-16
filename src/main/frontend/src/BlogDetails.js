@@ -1,4 +1,4 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "./useFetch";
 
 const BlogDetails = () => {
@@ -6,13 +6,13 @@ const BlogDetails = () => {
     const {id} = useParams();
     const {data: blog, isPending, error} = useFetch('http://localhost:8086/blogs/' + id)
     console.log("RETURNING BLOG DATA FROM COMPONENT", blog);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         fetch('http://localhost:8086/blogs/delete/' + blog.id, {
             method: 'DELETE'
         }).then(() => {
-            history.push('/')
+            navigate('/');
         })
     }
 
