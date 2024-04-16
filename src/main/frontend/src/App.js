@@ -3,8 +3,11 @@ import Home from './Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Create from './Create';
 import BlogDetails from './BlogDetails';
+import Login from './Login';
 
 function App() {
+  // const isLoggedIn = true; // Replace with your logic to determine if user is logged in or not
+
   return (
     <Router>
       <div className="App">
@@ -14,17 +17,21 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
             <Route path="/create">
-              <Create />
+              <Create/>
             </Route>
             <Route path="/blogs/:id">
-              <BlogDetails />
+              <BlogDetails/>
+              {/* <BlogDetails isLoggedIn={isLoggedIn} /> */}
             </Route>
           </Switch>
         </div>
       </div>
     </Router>
-    
+
   );
 }
 
