@@ -8,7 +8,8 @@ export default function Login() {
 
   const handleClick = () => {
     const callbackUrl = `${window.location.origin}`;
-    const googleClientId = "YOUR_CLIENT_ID_FROM_GOOGLE";
+    console.log(callbackUrl);
+    const googleClientId = "1040013347682-70127b4mbpsu00t0t92vp21giph5vhr4.apps.googleusercontent.com";
     const targetUrl = `https://accounts.google.com/o/oauth2/auth?redirect_uri=${encodeURIComponent(
       callbackUrl
     )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;
@@ -17,12 +18,15 @@ export default function Login() {
 
   useEffect(() => {
     const accessTokenRegex = /access_token=([^&]+)/;
-    const isMatch = window.location.href.match(accessTokenRegex);
+    const isMatch = window.location.hash.match(accessTokenRegex);
 
     if (isMatch) {
       const accessToken = isMatch[1];
+      console.log("Matched Access Token " + accessToken);
       Cookies.set("access_token", accessToken);
       setIsLoggedin(true);
+    } else{
+      console.log("No Access Token Found");
     }
   }, []);
 
@@ -33,7 +37,7 @@ export default function Login() {
   }, [isLoggedin, navigate]);
 
   return (
-    <div className="root">
+    <div className="login">
       <div>
         <h1>Log in with Google</h1>
         <div className="btn-container">

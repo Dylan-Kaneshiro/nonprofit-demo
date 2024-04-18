@@ -1,0 +1,8 @@
+{
+    "domain": "dev-33fa7nmj5infgacf.us.auth0.com",
+    "clientId": "6PJ2xM1qBtFkOtBoQDrIEm4hkAI9tifo",
+    "audience": "https://dev-33fa7nmj5infgacf.us.auth0.com/api/v2/",
+    "authorizationParams": {
+        "redirect": "http://localhost:3000"
+    }    
+  }

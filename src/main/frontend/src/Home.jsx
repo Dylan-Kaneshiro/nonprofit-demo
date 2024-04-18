@@ -1,11 +1,11 @@
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const Home = () => {
-  const { error, isPending, data: blogs } = useFetch('http://localhost:8086/blogs/list')
+  const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs/list')
   // Cookies.set('isLoggedIn', 'false', { expires: 7 });
-  Cookies.set('isLoggedIn', 'false', { });
+  // Cookies.set('isLoggedIn', 'false', { });
 
   return (
     <div className="home">
