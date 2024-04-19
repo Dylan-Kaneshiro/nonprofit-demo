@@ -3,9 +3,7 @@ import useFetch from "./useFetch";
 // import Cookies from 'js-cookie';
 
 const Home = () => {
-  const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs/list')
-  // Cookies.set('isLoggedIn', 'false', { expires: 7 });
-  // Cookies.set('isLoggedIn', 'false', { });
+  const { error, isPending, data: blogs } = useFetch('http://localhost:8086/blogs/list')
 
   return (
     <div className="home">
