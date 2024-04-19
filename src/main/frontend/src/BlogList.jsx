@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import blogIDToURL from "./Services/blogIDToURL";
 
 const BlogList = ({blogs, title}) => {
     //const blogs = props.blogs;

@@ -55,22 +55,6 @@
   
 }
 
-/* Navbar Buttons
-.navbar .btn {
-  background-color: #8bca84;
-  color: #000000;
-  padding: 6px 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  margin: 0;
-  margin-right: 30px;
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  display: inline-block;
-
-} */
-
 .navbar .btn {
   display: inline;
   float : left;
@@ -107,7 +91,7 @@ img {
   padding: 0px 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .blog-preview {
@@ -194,10 +178,43 @@ img {
   margin: 0 auto;
   text-align: center;
 }
+
+.create form {
+  border-style: solid;
+  border-radius: 15px;
+  border-color: #8bca84;
+  padding: 20px;
+}
+
+.create form:hover {
+  animation-name: donation-glow;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes donation-glow {
+  0%{
+    box-shadow: 0px 0px 0px #8bca84;
+  }
+  50%{
+    box-shadow: 0px 0px 20px #8bca84;
+  }
+  100%{
+    box-shadow: 0px 0px 0px #8bca84;
+  }
+}
+
+
 .create label {
   text-align: left;
   display: block;
 }
+
+.create h1 {
+  font-size: 35px;
+  color: #46923c;
+}
+
 .create h2 {
   font-size: 20px;
   color: #46923c;
@@ -221,7 +238,7 @@ img {
 }
 
 /* Login */
-
+/* 
 .login {
   display: flex;
   flex-direction: column;
@@ -241,7 +258,7 @@ img {
   width: 20px;
   height: 20px;
 
-}
+} */
 
 .btn-container {
   display: flex;
@@ -319,3 +336,25 @@ img {
   letter-spacing: 1px;
   font-family: monospace;
 }
+
+
+/* search bar */
+
+.search-bar-wrapper {
+  position: relative;
+  display: flex;
+  min-width: 100px;
+  justify-content: center;
+  margin: 60px 0px 40px 0px;
+}
+
+.search {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 50px;
+  width: 80%;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  background-color: #ffffff;
+}
+

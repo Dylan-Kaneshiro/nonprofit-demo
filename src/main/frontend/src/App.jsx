@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import Create from "./Create";
 import BlogDetails from "./BlogDetails";
-import Login from "./Login";
+// import Login from "./Login";
 import Loading from "./Loading";
 import Profile from "./Profile";
 
@@ -30,7 +30,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
+            {/* <Route path="/login" element={<Login />} /> */}
             <Route path="/create" element={<Create />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
           </Routes>
