@@ -179,6 +179,10 @@ img {
   text-align: center;
 }
 
+.create h2 {
+  padding-top: 150px;
+}
+
 .create form {
   border-style: solid;
   border-radius: 15px;
