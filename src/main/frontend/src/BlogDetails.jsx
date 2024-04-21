@@ -12,6 +12,12 @@ const BlogDetails = () => {
     const [donationInfo, setDonationInfo] = useState({amount:'', cardNumber: '', cardHolder: '', expiryDate: '', cvv: '', blogID: id});
     const [isLoading, setIsLoading] = useState(false);
 
+    // Get the current date in "YYYY-MM" format
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 2; // Months are 0-indexed
+    const minExpiryDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+
     const handleClick = () => {
         fetch(blogIDToURL(blog.id), {
             method:'DELETE'
@@ -73,9 +79,9 @@ const BlogDetails = () => {
                         <label>Card Number:</label>
                         <input type="number" min="1000000000000000" max="9999999999999999" name="cardNumber" value={donationInfo.cardNumber} onChange={handleInputChange} placeholder="Card Number" required />
                         <label>Expiry Date:</label>
-                        <input type="month" name="expiryDate" value={donationInfo.expiryDate} onChange={handleInputChange} placeholder="Expiry Date" required />
+                        <input type="month" name="expiryDate" min={minExpiryDate} value={donationInfo.expiryDate} onChange={handleInputChange} placeholder="Expiry Date" required />
                         <label>CVV:</label>
-                        <input type="number" name="cvv" value={donationInfo.cvv} onChange={handleInputChange} placeholder="CVV" required />
+                        <input type="number" name="cvv" min="000" max="999" step="1" value={donationInfo.cvv} onChange={handleInputChange} placeholder="CVV" required />
                         <button type="submit">Donate</button>
                     </form>
                 </div>
