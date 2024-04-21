@@ -12,6 +12,7 @@ const BlogList = ({blogs, title}) => {
                     <Link to={`/blogs/${blog.id}`}>
                         <h2>{blog.title}</h2>
                         <p>{blog.author}</p>
+                        <p>{blog.city}</p>
                     </Link>
                 </div>
             ))}
