@@ -51,9 +51,12 @@ const BlogDetails = () => {
                     <h3>By {blog.author}</h3>
                     <br />
                     <p><strong>Address: </strong> {blog.address}</p>
+                    <p><strong>City: </strong> {blog.city}</p>
                     <p><strong>Hours: </strong> {blog.hours}</p>
                     <p><strong>Phone: </strong> {blog.phone}</p>
                     <p><strong>Email: </strong> {blog.email}</p>
+                    <br />
+                    <p><strong>Total funds raised: </strong> {blog.funds}</p>
                     <div>{blog.body}</div>
                     <button onClick={handleClick}>delete</button>
                 </article>
@@ -68,7 +71,7 @@ const BlogDetails = () => {
                         <label>Card Holder Name:</label>
                         <input type="text" name="cardHolder" value={donationInfo.cardHolder} onChange={handleInputChange} placeholder="Card Holder" required />
                         <label>Card Number:</label>
-                        <input type="number" name="cardNumber" value={donationInfo.cardNumber} onChange={handleInputChange} placeholder="Card Number" required />
+                        <input type="number" min="1000000000000000" max="9999999999999999" name="cardNumber" value={donationInfo.cardNumber} onChange={handleInputChange} placeholder="Card Number" required />
                         <label>Expiry Date:</label>
                         <input type="month" name="expiryDate" value={donationInfo.expiryDate} onChange={handleInputChange} placeholder="Expiry Date" required />
                         <label>CVV:</label>
