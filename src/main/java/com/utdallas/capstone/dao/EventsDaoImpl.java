@@ -1,5 +1,6 @@
 package com.utdallas.capstone.dao;
 
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class EventsDaoImpl implements IEventsDao {
 
     public List<EventsVO> getEventsByOrganization(String searchParam) {
         return eventsMapper.getEventsByOrganization(searchParam);
+    }
+
+    public boolean transactDonation(EventDonationVO eventDonation, int id) {
+        int rowsAffected = eventsMapper.transactDonation(eventDonation, id);
+        return rowsAffected > 0;
     }
 }

@@ -1,5 +1,6 @@
 package com.utdallas.capstone.mapper;
 
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import org.apache.ibatis.annotations.*;
 
@@ -68,5 +69,8 @@ public interface EventsMapper {
 
     @Update(REMOVE_EVENTS)
      int deleteEvent(@Param("id") int id);
+
+    @Insert(RECORD_DONATION_BY_EVENT_ID)
+    int transactDonation(@Param("eventDonation") EventDonationVO eventDonation, @Param("id") int id);
 
 }

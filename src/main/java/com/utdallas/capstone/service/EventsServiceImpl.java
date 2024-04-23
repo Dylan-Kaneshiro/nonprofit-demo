@@ -1,6 +1,7 @@
 package com.utdallas.capstone.service;
 
 import com.utdallas.capstone.dao.IEventsDao;
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -52,5 +53,11 @@ public class EventsServiceImpl implements IEventsService {
             eventList = eventsDao.getEventsByOrganization(searchParam);
             return eventList;
         }
+    }
+
+    @Override
+    public boolean transactDonation(EventDonationVO eventDonation, int id) {
+        log.info("Posting donation details for event ID: {} - {}", id, eventDonation);
+        return eventsDao.transactDonation(eventDonation, id);
     }
 }
