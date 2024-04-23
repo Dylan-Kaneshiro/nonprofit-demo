@@ -1,5 +1,6 @@
 package com.utdallas.capstone.dao;
 
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 
 import java.util.List;
@@ -11,5 +12,7 @@ public interface IEventsDao {
     List<EventsVO> getEventsByName(String searchParam);
     List<EventsVO> getEventsByOrganization(String searchParam);
     boolean deleteEvent(int id);
+
+    boolean transactDonation(EventDonationVO eventDonation, int id);
 
 }

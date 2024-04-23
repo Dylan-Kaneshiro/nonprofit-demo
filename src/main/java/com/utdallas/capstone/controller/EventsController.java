@@ -1,6 +1,7 @@
 package com.utdallas.capstone.controller;
 
 import com.utdallas.capstone.service.IEventsService;
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,7 +63,8 @@ public class EventsController {
     @GetMapping(value = "blogs/search")
     @ResponseBody
     public ResponseEntity<List<EventsVO>> getFilteredEventsOnNameOrOrganization(
-           @ApiParam @RequestParam(name = "searchParam", required = false) String searchParam
+           @ApiParam(value = "searchParam", example = "Event Name")
+           @RequestParam(name = "searchParam", required = false) String searchParam
     ) {
         log.info("EventsController :: Getting filtered results for search param: {}", searchParam);
         List<EventsVO> eventList;
@@ -74,5 +76,13 @@ public class EventsController {
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
+
+    @PostMapping(value = "blogs/{id}/donate")
+    public ResponseEntity<EventDonationVO> donateToEvent(@RequestBody EventDonationVO eventDonation,
+                                                         @PathVariable("id") int id) {
+        log.info("EventsController :: Donation recorded for event ID: {}", id);
+        eventsService.transactDonation(eventDonation, id);
+        return new ResponseEntity<>(eventDonation, HttpStatus.OK);
+    }
 
 }
