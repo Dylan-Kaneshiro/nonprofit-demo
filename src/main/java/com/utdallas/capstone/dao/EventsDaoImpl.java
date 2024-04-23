@@ -50,6 +50,7 @@ public class EventsDaoImpl implements IEventsDao {
     }
 
     public boolean transactDonation(EventDonationVO eventDonation, int id) {
+
         int rowsAffected = eventsMapper.transactDonation(eventDonation, id);
         return rowsAffected > 0;
     }
