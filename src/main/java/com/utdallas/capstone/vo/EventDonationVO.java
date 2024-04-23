@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class EventDonationVO {
-    private String donorName;
-    private String creditCardNumber;
+    private String cardHolder;
+    private String cardNumber;
     private int cvv;
-    private int donationAmount;
+    private int amount;
     private String expiryDate;
-
+    private int blogID;
 }

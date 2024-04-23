@@ -23,6 +23,6 @@ public class EventsQueries {
 
     public final static String RECORD_DONATION_BY_EVENT_ID = "INSERT INTO donations (event_id, card_number, " +
             "cardholder_name, cvv, expiration_date, donation_amount)\n" +
-            "VALUES (#{id}, #{eventDonation.creditCardNumber}, #{eventDonation.donorName}, #{eventDonation.cvv},\n" +
-            "#{eventDonation.expiryDate}, #{eventDonation.donationAmount})";
+            "VALUES (#{id}, #{eventDonation.cardNumber}, #{eventDonation.cardHolder}, #{eventDonation.cvv},\n" +
+            "#{eventDonation.expiryDate}, #{eventDonation.amount})";
 }
