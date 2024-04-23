@@ -16,6 +16,8 @@
   background-color: #276221;
   position:fixed;
   width: 100%;
+
+  z-index: 1000; /* any high number */
 }
 .navbar h1 {
   color: #f2f2f2;
@@ -177,6 +179,10 @@ img {
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
+}
+
+.create h2 {
+  padding-top: 150px;
 }
 
 .create form {
@@ -352,9 +358,46 @@ img {
   border: 1px solid grey;
   border-radius: 5px;
   height: 50px;
-  width: 80%;
+  width: 60%;
   padding: 2px 23px 2px 30px;
   outline: 0;
   background-color: #ffffff;
+}
+
+.search-city {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 50px;
+  width: 20%;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  background-color: #ffffff;
+}
+
+.search-button {
+  width: 5%;
+  border: 1px solid;
+  background-color: white;
+  border-color: #46923c;
+  color: #46923c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  animation-name: search-button-hover;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes search-button-hover {
+  0% {
+    background-color: white;
+    color: #46923c;
+  }
+  100% {
+    background-color: #46923c;
+    color: white;
+  }
 }
 

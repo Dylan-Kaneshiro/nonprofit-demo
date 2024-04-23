@@ -1,41 +1,88 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import createBlogURL from './Services/createBlogURL';
 
 const Create = () => {
     const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [hours, setHours] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
     const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('mario');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        setIsLoading(true);
         e.preventDefault();
-        const blog = {title, body, author};
-        
+        const blog = { title, author, address, city, hours, phone, email, body };
 
-        fetch('http://localhost:8000/blogs', {
+        setIsLoading(true);
+
+        fetch(createBlogURL(), {
             method: 'POST',
-            headers: {"Content-Type":"application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(blog)
         }).then(() => {
             console.log('new blog added');
             setIsLoading(false);
-            //history.go(-1);
             navigate('/');
         })
     }
-    
-    return ( 
+
+    return (
         <div className="create">
             <h2>Add a new blog</h2>
             <form onSubmit={handleSubmit}>
                 <label>Blog title:</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                />
+                <label>Author:</label>
+                <input
+                    type="text"
+                    required
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
+                <label>Address:</label>
+                <input
+                    type="text"
+                    required
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                />
+                <label>City:</label>
+                <input
+                    type="text"
+                    required
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
+                <label>Hours:</label>
+                <input
+                    type="text"
+                    required
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                />
+                <label>Phone:</label>
+                <input
+                    type="number"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <label>Email:</label>
+                <input
+                    type="text"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <label>Blog body:</label>
                 <textarea
@@ -43,19 +90,11 @@ const Create = () => {
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 ></textarea>
-                <label>Blog author:</label>
-                <select
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                >
-                    <option value="mario">mario</option>
-                    <option value="yoshi">yoshi</option>
-                </select>
-                {!isLoading && <button>Add blog</button>}
-                {isLoading && <button disabled>Adding blog...</button>}
+                {!isLoading && <button>Add Blog</button>}
+                {isLoading && <button disabled>Adding Blog...</button>}
             </form>
         </div>
-     );
+    );
 }
- 
+
 export default Create;
