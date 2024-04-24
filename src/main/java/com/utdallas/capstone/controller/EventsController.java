@@ -1,6 +1,7 @@
 package com.utdallas.capstone.controller;
 
 import com.utdallas.capstone.service.IEventsService;
+import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Api
@@ -21,14 +23,6 @@ public class EventsController {
         this.eventsService = eventsService;
     }
 
-
-    @ApiOperation(value = "Gets list of all active blogs")
-    @GetMapping(value = "blogs/list")
-    public ResponseEntity<List<EventsVO>> getEventList() {
-        List<EventsVO> eventList = eventsService.getEventList();
-        log.info("Fetched {} records for eventList: {}", eventList.size(), eventList);
-        return new ResponseEntity<>(eventList, HttpStatus.OK);
-    }
 
 
     @ApiOperation("Gets details for a specific blog with the ID provided")
@@ -62,11 +56,12 @@ public class EventsController {
     @GetMapping(value = "blogs/search")
     @ResponseBody
     public ResponseEntity<List<EventsVO>> getFilteredEventsOnNameOrOrganization(
-           @ApiParam @RequestParam(name = "searchParam", required = false) String searchParam
+           @ApiParam(value = "searchParam", example = "Event Name")
+           @RequestParam(name = "searchParam", required = false) String searchParam
     ) {
         log.info("EventsController :: Getting filtered results for search param: {}", searchParam);
         List<EventsVO> eventList;
-        if(searchParam == null) {
+        if(StringUtils.isEmpty(searchParam)) {
             eventList = eventsService.getEventList();
         } else {
             eventList = eventsService.getFilteredEvents(searchParam);
@@ -74,5 +69,12 @@ public class EventsController {
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
+
+    @PostMapping(value = "blogs/donate")
+    public ResponseEntity<EventDonationVO> donateToEvent(@RequestBody EventDonationVO eventDonation) {
+        log.info("EventsController :: Donation recorded for event ID: {}", eventDonation.getBlogID());
+        eventsService.transactDonation(eventDonation, eventDonation.getBlogID());
+        return new ResponseEntity<>(eventDonation, HttpStatus.OK);
+    }
 
 }

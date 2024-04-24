@@ -20,4 +20,9 @@ public class EventsQueries {
             "and event_status = 'A'";
 
     public final static String GET_EVENTS_BY_ORGANIZATION = "SELECT * FROM EVENTS WHERE author LIKE '%${searchParam}%'";
+
+    public final static String RECORD_DONATION_BY_EVENT_ID = "INSERT INTO donations (event_id, card_number, " +
+            "cardholder_name, cvv, expiration_date, donation_amount)\n" +
+            "VALUES (#{id}, #{eventDonation.cardNumber}, #{eventDonation.cardHolder}, #{eventDonation.cvv},\n" +
+            "#{eventDonation.expiryDate}, #{eventDonation.amount})";
 }
