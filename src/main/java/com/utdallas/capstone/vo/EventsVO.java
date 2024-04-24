@@ -19,5 +19,6 @@ public class EventsVO {
     private String hours;
     private String email;
     private int id;
+    private String city;
 
 }

@@ -45,14 +45,12 @@ public class EventsServiceImpl implements IEventsService {
     }
 
     @Override
-    public List<EventsVO> getFilteredEvents(String searchParam) {
-        List<EventsVO> eventList = eventsDao.getEventsByName(searchParam);
+    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam) {
+        List<EventsVO> eventList = eventsDao.getFilteredEvents(searchParam, citySearchParam);
         if(!eventList.isEmpty()) {
             return eventList;
-        } else {
-            eventList = eventsDao.getEventsByOrganization(searchParam);
-            return eventList;
         }
+        return null;
     }
 
     @Override
