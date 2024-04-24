@@ -3,13 +3,12 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
 import BlogList from "./BlogList";
-import { useCookie } from "react-use";
+
+import { useAllowed } from "./util/useAllowed";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [cookie] = useCookie("isAllowed");
-  const [isAllowed, setIsAllowed] = useState(false);
-
+  const {isAllowed} = useAllowed();
   const {
     error,
     isPending,
@@ -17,16 +16,6 @@ const Profile = () => {
   } = useFetch("http://localhost:8086/blogs/email=" + user.email);
   console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
 
-  // if (isLoading) {
-  //   return <div>Loading ...</div>;
-  // }
-  useEffect(() => {
-    if (cookie === "true") {
-      setIsAllowed(true);
-    } else {
-      setIsAllowed(false);
-    }
-  }, [cookie]);
 
   return (
     isAuthenticated && (

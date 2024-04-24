@@ -3,6 +3,9 @@ import useFetch from "./useFetch";
 import blogIDToURL from "./Services/blogIDToURL";
 import donationURL from "./Services/donationURL";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useCookie } from "react-use";
+import { useAllowed } from "./util/useAllowed";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -18,16 +21,7 @@ const BlogDetails = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   //auth cookie
-  const [cookie] = useCookie("isAllowed");
-  const [isAllowed, setIsAllowed] = useState(false);
-
-  useEffect(() => {
-    if (cookie === "true") {
-      setIsAllowed(true);
-    } else {
-      setIsAllowed(false);
-    }
-  }, [cookie]);
+  const { isAllowed } = useAllowed();
 
   // Get the current date in "YYYY-MM" format
   const currentDate = new Date();

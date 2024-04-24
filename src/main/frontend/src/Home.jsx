@@ -2,6 +2,7 @@ import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 import { useState } from "react";
 import useBlogs from "./Services/useBlogs";
+// import { Dropdown}
 
 // import Cookies from 'js-cookie';
 
@@ -28,14 +29,14 @@ const Home = () => {
       {/*Search Bar */}
       <form onSubmit={handleSubmit} class="search-bar-wrapper">
         <input
-          class="search"
+          className="search"
           type="text"
           placeholder="Search posts and organizations"
           value={tempSearchTerm}
           onChange={(e) => setTempSearchTerm(e.target.value)}
         />
         <input
-          class="search-city"
+          className="search-city"
           type="text"
           placeholder="City ('Virtual' for online)"
           value={tempCity}

@@ -10,7 +10,6 @@ import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import useBlogs from "./Services/useBlogs";
 
 const Authorize = () => {
     const { user, isAuthenticated, isLoading, logout, getAccessTokenSilently } = useAuth0();
@@ -32,12 +31,14 @@ const Authorize = () => {
         const checkUser = async () => {
             // const response = await fetch(`http://localhost:8000/auth/users/${user.email}`);
             //set response to true for now
-            const response = { status: 500 };
+            const response = { status: 200 };
             if (response.status === 200) {
-                Cookies.set("isAllowed", "true");
+                Cookies.set("isAllowed", "true" , { expires: 1, sameSite: "strict", secure: true});
             } else {
-                Cookies.set("isAllowed", "false");
+                Cookies.set("isAllowed", "false" , { expires: 1, sameSite: "strict", secure: true});
             }
+            console.log("COOKIE (authorize.jsx)", Cookies.get("isAllowed"));
+            //navigate to home page after setting cookie
             navigate("/");
         };
         checkUser();
