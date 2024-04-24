@@ -8,7 +8,7 @@ import java.util.List;
 public interface IEventsService {
     EventsVO getEventDetails(int id);
     List<EventsVO> getEventList();
-    List<EventsVO> getFilteredEvents(String searchParam);
+    List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam);
 
     boolean transactDonation(EventDonationVO eventDonation, int id);
 

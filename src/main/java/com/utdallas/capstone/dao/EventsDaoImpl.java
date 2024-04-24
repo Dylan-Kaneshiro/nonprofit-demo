@@ -18,37 +18,38 @@ public class EventsDaoImpl implements IEventsDao {
         this.eventsMapper = eventsMapper;
     }
 
-
+    @Override
     public EventsVO getEventDetails(int id) {
         log.info("PoolBDaoImpl :: Calling mapper to get event details");
         return eventsMapper.getEventDetail(id);
     }
 
+    @Override
     public boolean addEvent(EventsVO event) {
         int rowsAffected = eventsMapper.addEvent(event);
         return rowsAffected > 0;
 
     }
 
+    @Override
     public List<EventsVO> getEventList() {
         log.info("EventsDaoImpl :: Fetching event list from mapper");
         return eventsMapper.getEventList();
     }
 
+    @Override
     public boolean deleteEvent(int id) {
         log.info("EventsDaoImpl :: Deleting event id: {}", id);
         int rowsAffected = eventsMapper.deleteEvent(id);
         return rowsAffected > 0;
     }
 
-    public List<EventsVO> getEventsByName(String searchParam) {
-        return eventsMapper.getEventsByName(searchParam);
+    @Override
+    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam) {
+        return eventsMapper.getFilteredEvents(searchParam, citySearchParam);
     }
 
-    public List<EventsVO> getEventsByOrganization(String searchParam) {
-        return eventsMapper.getEventsByOrganization(searchParam);
-    }
-
+    @Override
     public boolean transactDonation(EventDonationVO eventDonation, int id) {
 
         int rowsAffected = eventsMapper.transactDonation(eventDonation, id);

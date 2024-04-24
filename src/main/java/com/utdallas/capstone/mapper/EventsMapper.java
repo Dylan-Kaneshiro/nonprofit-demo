@@ -65,6 +65,21 @@ public interface EventsMapper {
     })
     List<EventsVO> getEventsByOrganization(@Param("searchParam") String searchParam);
 
+    @Select(GET_FILTERED_EVENTS)
+    @Results({
+            @Result(property = "title", column = "title"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "author", column = "author"),
+            @Result(property = "address", column = "address"),
+            @Result(property = "phone", column = "phone"),
+            @Result(property = "hours", column = "hours"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "city", column = "city")
+    })
+    List<EventsVO> getFilteredEvents(@Param("searchParam") String searchParam,
+                                     @Param("citySearchParam") String citySearchParam);
+
 
 
     @Update(REMOVE_EVENTS)
