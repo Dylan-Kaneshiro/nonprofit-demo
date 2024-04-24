@@ -7,6 +7,7 @@ import BlogDetails from "./BlogDetails";
 // import Login from "./Login";
 import Loading from "./Loading";
 import Profile from "./Profile";
+import Authorize from "./Authorize";
 
 import Cookies from "js-cookie";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -18,9 +19,9 @@ function App() {
     return <div>Oops... {error.message}</div>;
   }
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <Router>
@@ -30,7 +31,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/authorize" element={<Authorize />} />
             <Route path="/create" element={<Create />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
           </Routes>

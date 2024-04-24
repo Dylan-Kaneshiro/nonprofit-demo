@@ -2,6 +2,7 @@ import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 import { useState } from "react";
 import useBlogs from "./Services/useBlogs";
+
 // import Cookies from 'js-cookie';
 
 const Home = () => {
@@ -38,8 +39,10 @@ const Home = () => {
           type="text"
           placeholder="City ('Virtual' for online)"
           value={tempCity}
+          datalist="cities"
           onChange={(e) => setTempCity(e.target.value)}
         />
+
         <button class="search-button">Search</button>
       </form>
 

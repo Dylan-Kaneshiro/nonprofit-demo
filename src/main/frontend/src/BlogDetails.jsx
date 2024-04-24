@@ -2,98 +2,174 @@ import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "./useFetch";
 import blogIDToURL from "./Services/blogIDToURL";
 import donationURL from "./Services/donationURL";
-import { useState } from 'react';
+import { useState } from "react";
 
 const BlogDetails = () => {
+  const { id } = useParams();
+  const { data: blog, isPending, error } = useFetch(blogIDToURL(id));
+  const navigate = useNavigate();
+  const [donationInfo, setDonationInfo] = useState({
+    amount: "",
+    cardNumber: "",
+    cardHolder: "",
+    expiryDate: "",
+    cvv: "",
+    blogID: id,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  //auth cookie
+  const [cookie] = useCookie("isAllowed");
+  const [isAllowed, setIsAllowed] = useState(false);
 
-    const { id } = useParams();
-    const { data: blog, isPending, error } = useFetch(blogIDToURL(id))
-    const navigate = useNavigate();
-    const [donationInfo, setDonationInfo] = useState({amount:'', cardNumber: '', cardHolder: '', expiryDate: '', cvv: '', blogID: id});
-    const [isLoading, setIsLoading] = useState(false);
-
-    // Get the current date in "YYYY-MM" format
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 2; // Months are 0-indexed
-    const minExpiryDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
-
-    const handleClick = () => {
-        fetch(blogIDToURL(blog.id), {
-            method:'DELETE'
-        }).then(() => {
-            navigate('/')
-        })
+  useEffect(() => {
+    if (cookie === "true") {
+      setIsAllowed(true);
+    } else {
+      setIsAllowed(false);
     }
+  }, [cookie]);
 
-    const handleInputChange = (event) => {
-        setDonationInfo({...donationInfo, [event.target.name]: event.target.value});
-    }
+  // Get the current date in "YYYY-MM" format
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 2; // Months are 0-indexed
+  const minExpiryDate = `${currentYear}-${currentMonth
+    .toString()
+    .padStart(2, "0")}`;
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setIsLoading(true);
-        
+  const handleClick = () => {
+    fetch(blogIDToURL(blog.id), {
+      method: "DELETE",
+    }).then(() => {
+      navigate("/");
+    });
+  };
 
-        fetch(donationURL(), {
-            method: 'POST',
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(donationInfo)
-        }).then(() => {
-            console.log('new donation added');
-            setIsLoading(false);
-            //history.go(-1);
-            navigate('/');
-        })
-    }
+  const handleInputChange = (event) => {
+    setDonationInfo({
+      ...donationInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    return ( 
-        <div className="blog-details">
-            {isPending && <div>Loading ...</div>}
-            {error && <div>{error}</div>}
-            {blog && (
-                <article>
-                    <h2>{blog.title}</h2>
-                    <h3>By {blog.author}</h3>
-                    <br />
-                    <p><strong>Address: </strong> {blog.address}</p>
-                    <p><strong>City: </strong> {blog.city}</p>
-                    <p><strong>Hours: </strong> {blog.hours}</p>
-                    <p><strong>Phone: </strong> {blog.phone}</p>
-                    <p><strong>Email: </strong> {blog.email}</p>
-                    <br />
-                    <p><strong>Total funds raised: </strong> {blog.funds}</p>
-                    <div>{blog.body}</div>
-                    <button onClick={handleClick}>delete</button>
-                </article>
-            )}
-            {blog && (
-                <div className="create">
-                    <form onSubmit={handleFormSubmit}>
-                        <h1>Donate now!</h1>
-                        <br />
-                        <label>Amount (USD):</label>
-                        <input type="number" min="0.01" step="0.01" name="amount" value={donationInfo.amount} onChange={handleInputChange} placeholder="Donation Amount" required />
-                        <label>Card Holder Name:</label>
-                        <input type="text" name="cardHolder" value={donationInfo.cardHolder} onChange={handleInputChange} placeholder="Card Holder" required />
-                        <label>Card Number:</label>
-                        <input type="number" min="1000000000000000" max="9999999999999999" name="cardNumber" value={donationInfo.cardNumber} onChange={handleInputChange} placeholder="Card Number" required />
-                        <label>Expiry Date:</label>
-                        <input type="month" name="expiryDate" min={minExpiryDate} value={donationInfo.expiryDate} onChange={handleInputChange} placeholder="Expiry Date" required />
-                        <label>CVV:</label>
-                        <input type="number" name="cvv" min="000" max="999" step="1" value={donationInfo.cvv} onChange={handleInputChange} placeholder="CVV" required />
-                        <button type="submit">Donate</button>
-                    </form>
-                </div>
-            )}
-            <p>{donationInfo['amount']}</p>
-            <p>{donationInfo['cardNumber']}</p>
-            <p>{donationInfo['cardHolder']}</p>
-            <p>{donationInfo['expiryDate']}</p>
-            <p>{donationInfo['cvv']}</p>
-            <p>{donationInfo['blogID']}</p>
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    fetch(donationURL(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(donationInfo),
+    }).then(() => {
+      console.log("new donation added");
+      setIsLoading(false);
+      //history.go(-1);
+      navigate("/");
+    });
+  };
+
+  return (
+    <div className="blog-details">
+      {isPending && <div>Loading ...</div>}
+      {error && <div>{error}</div>}
+      {blog && (
+        <article>
+          <h2>{blog.title}</h2>
+          <h3>By {blog.author}</h3>
+          <br />
+          <p>
+            <strong>Address: </strong> {blog.address}
+          </p>
+          <p>
+            <strong>City: </strong> {blog.city}
+          </p>
+          <p>
+            <strong>Hours: </strong> {blog.hours}
+          </p>
+          <p>
+            <strong>Phone: </strong> {blog.phone}
+          </p>
+          <p>
+            <strong>Email: </strong> {blog.email}
+          </p>
+          <br />
+          <p>
+            <strong>Total funds raised: </strong> {blog.funds}
+          </p>
+          <div>{blog.body}</div>
+          <button onClick={handleClick}>delete</button>
+        </article>
+      )}
+      {blog && (
+        <div className="create">
+          <form onSubmit={handleFormSubmit}>
+            <h1>Donate now!</h1>
+            <br />
+            <label>Amount (USD):</label>
+            <input
+              type="number"
+              min="0.01"
+              step="0.01"
+              name="amount"
+              value={donationInfo.amount}
+              onChange={handleInputChange}
+              placeholder="Donation Amount"
+              required
+            />
+            <label>Card Holder Name:</label>
+            <input
+              type="text"
+              name="cardHolder"
+              value={donationInfo.cardHolder}
+              onChange={handleInputChange}
+              placeholder="Card Holder"
+              required
+            />
+            <label>Card Number:</label>
+            <input
+              type="number"
+              min="1000000000000000"
+              max="9999999999999999"
+              name="cardNumber"
+              value={donationInfo.cardNumber}
+              onChange={handleInputChange}
+              placeholder="Card Number"
+              required
+            />
+            <label>Expiry Date:</label>
+            <input
+              type="month"
+              name="expiryDate"
+              min={minExpiryDate}
+              value={donationInfo.expiryDate}
+              onChange={handleInputChange}
+              placeholder="Expiry Date"
+              required
+            />
+            <label>CVV:</label>
+            <input
+              type="number"
+              name="cvv"
+              min="000"
+              max="999"
+              step="1"
+              value={donationInfo.cvv}
+              onChange={handleInputChange}
+              placeholder="CVV"
+              required
+            />
+            <button type="submit">Donate</button>
+          </form>
         </div>
-     );
-}
- 
+      )}
+      <p>{donationInfo["amount"]}</p>
+      <p>{donationInfo["cardNumber"]}</p>
+      <p>{donationInfo["cardHolder"]}</p>
+      <p>{donationInfo["expiryDate"]}</p>
+      <p>{donationInfo["cvv"]}</p>
+      <p>{donationInfo["blogID"]}</p>
+    </div>
+  );
+};
+
 export default BlogDetails;
