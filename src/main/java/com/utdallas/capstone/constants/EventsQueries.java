@@ -28,6 +28,8 @@ public class EventsQueries {
             "#{eventDonation.expiryDate}, #{eventDonation.amount})";
 
     public final static String GET_FILTERED_EVENTS =
-            "SELECT * FROM events where title like '%${searchParam}%' and " +
-            "city like '%${citySearchParam}%' and event_status = 'A'";
+            "SELECT * from events where \n" +
+                    "case when title like '%${searchParam}%' and city like '%${citySearchParam}%' then 1 \n" +
+                    "when author like '%${searchParam}%' and city like '%${citySearchParam}%' then 1 \n" +
+                    "else 0 end = 1 and event_status = 'A'";
 }

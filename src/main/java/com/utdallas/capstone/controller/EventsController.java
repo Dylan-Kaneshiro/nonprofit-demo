@@ -1,21 +1,15 @@
 package com.utdallas.capstone.controller;
 
 import com.utdallas.capstone.service.IEventsService;
-import com.utdallas.capstone.vo.CapstoneEnvironmentProp;
 import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Api
@@ -26,7 +20,6 @@ public class EventsController {
     private final IEventsService eventsService;
 
     @Autowired
-    private CapstoneEnvironmentProp capstoneEnvironmentProp;
 
     public EventsController(IEventsService eventsService) {
         this.eventsService = eventsService;
