@@ -63,39 +63,81 @@ const BlogDetails = () => {
   };
 
   return (
-    <div className="blog-details">
+    <div
+      className="blog-details"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       {isPending && <div>Loading ...</div>}
       {error && <div>{error}</div>}
       {blog && (
-        <article>
-          <h2>{blog.title}</h2>
-          <h3>By {blog.author}</h3>
-          <br />
-          <p>
-            <strong>Address: </strong> {blog.address}
-          </p>
-          <p>
-            <strong>City: </strong> {blog.city}
-          </p>
-          <p>
-            <strong>Hours: </strong> {blog.hours}
-          </p>
-          <p>
-            <strong>Phone: </strong> {blog.phone}
-          </p>
-          <p>
-            <strong>Email: </strong> {blog.email}
-          </p>
-          <br />
-          <p>
+        <article
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+            justifyContent: "center",
+            maxWidth: "600px",
+            // margin: '0 auto',
+            padding: "20px",
+            backgroundColor: "#f5f5f5",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
+          }}
+        >
+          <h2 style={{ marginBottom: "10px" }}>{blog.title}</h2>
+          <h3 style={{ color: "#888", marginBottom: "20px" }}>
+            By {blog.author}
+          </h3>
+          <div style={{ marginBottom: "20px" }}>
+            <p>
+              <strong>Address: </strong> {blog.address}
+            </p>
+            <p>
+              <strong>City: </strong> {blog.city}
+            </p>
+            <p>
+              <strong>Hours: </strong> {blog.hours}
+            </p>
+            <p>
+              <strong>Phone: </strong> {blog.phone}
+            </p>
+            <p>
+              <strong>Email: </strong> {blog.email}
+            </p>
+          </div>
+          <p style={{ marginBottom: "20px" }}>
             <strong>Total funds raised: </strong> {blog.funds}
           </p>
-          <div>{blog.body}</div>
-          <button onClick={handleClick}>delete</button>
+          <div style={{ marginBottom: "20px" }}>{blog.body}</div>
+          <button
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#ff6347",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+            onClick={handleClick}
+          >
+            delete
+          </button>
         </article>
       )}
+
       {blog && (
-        <div className="create">
+        <div
+          className="create"
+          style={{
+            flex: "1",
+            marginLeft: "20px",
+          }}
+        >
           <form onSubmit={handleFormSubmit}>
             <h1>Donate now!</h1>
             <br />

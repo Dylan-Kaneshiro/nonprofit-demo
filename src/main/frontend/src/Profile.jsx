@@ -3,19 +3,21 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
 import BlogList from "./BlogList";
+import useBlogs from "./Services/useBlogs";
 
 import { useAllowed } from "./util/useAllowed";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const {isAllowed} = useAllowed();
-  const {
-    error,
-    isPending,
-    data: blogs,
-  } = useFetch("http://localhost:8086/blogs/email=" + user.email);
-  console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
+  // const {
+  //   error,
+  //   isPending,
+  //   data: blogs,
+  // } = useFetch("http://localhost:8086/blogs/email=" + user.email);
+  // console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
 
+  const { blogs } = useBlogs(user.email);
 
   return (
     isAuthenticated && (
