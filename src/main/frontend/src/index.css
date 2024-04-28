@@ -147,7 +147,13 @@ img {
 
 /* blog details page */
 .blog-details {
-  padding: 50px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .blog-details h2 {

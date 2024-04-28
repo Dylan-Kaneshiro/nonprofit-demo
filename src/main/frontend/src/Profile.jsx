@@ -17,7 +17,7 @@ const Profile = () => {
   // } = useFetch("http://localhost:8086/blogs/email=" + user.email);
   // console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
 
-  const { blogs } = useBlogs(user.email);
+  const { error, isPending, data: blogs } = useBlogs("American", "");
 
   return (
     isAuthenticated && (

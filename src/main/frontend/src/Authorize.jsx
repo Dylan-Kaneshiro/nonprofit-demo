@@ -10,6 +10,7 @@ import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import useUserAuth from "./Services/useUserAuth";
 
 const Authorize = () => {
     const { user, isAuthenticated, isLoading, logout, getAccessTokenSilently } = useAuth0();
@@ -29,9 +30,10 @@ const Authorize = () => {
             return;
         }
         const checkUser = async () => {
-            // const response = await fetch(`http://localhost:8000/auth/users/${user.email}`);
-            //set response to true for now
-            const response = { status: 200 };
+            //get Y/N from backend
+            const response = await fetch("http://localhost:8086/api/v1/auth/" + user.email);
+            const data = await response.json(); // parse the response body
+            console.log("DATA", data);            
             if (response.status === 200) {
                 Cookies.set("isAllowed", "true" , { expires: 1, sameSite: "strict", secure: true});
             } else {

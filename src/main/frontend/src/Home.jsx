@@ -14,7 +14,6 @@ const Home = () => {
 
   // Directly use `useBlogs` with the searchTerm, initiating it with an empty string or a default value.
   const { error, isPending, data: blogs } = useBlogs(searchTerm, city);
-
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent form submission from reloading the page
     // No need to manually fetch or set state here; `useBlogs` handles it based on `searchTerm`.
