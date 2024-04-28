@@ -78,14 +78,36 @@ public interface EventsMapper {
             @Result(property = "city", column = "city")
     })
     List<EventsVO> getFilteredEvents(@Param("searchParam") String searchParam,
-                                     @Param("citySearchParam") String citySearchParam);
+                                     @Param("citySearchParam") String citySearchParam,
+                                     @Param("sortParam") String sortParam);
+
+    @Select(GET_ORGANIZATION_EXCLUSIVE_EVENTS)
+    @Results({
+            @Result(property = "title", column = "title"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "author", column = "author"),
+            @Result(property = "address", column = "address"),
+            @Result(property = "phone", column = "phone"),
+            @Result(property = "hours", column = "hours"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "city", column = "city"),
+            @Result(property = "code", column = "code")
+    })
+    List<EventsVO> getExclusiveEvents(@Param("organizationCode") String organizationCode);
 
 
 
     @Update(REMOVE_EVENTS)
      int deleteEvent(@Param("id") int id);
 
+    @Update(INCREMENT_EVENT_COUNT_BY_ID)
+    int incrementEventCountById(@Param("id") int id);
+
     @Insert(RECORD_DONATION_BY_EVENT_ID)
     int transactDonation(@Param("eventDonation") EventDonationVO eventDonation, @Param("id") int id);
+
+    @Select(GET_TOTAL_DONATIONS_BY_EVENT_ID)
+    int getTotalDonationsBasedOnEventId(@Param("event_id") int id);
 
 }

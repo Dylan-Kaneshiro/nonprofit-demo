@@ -30,7 +30,7 @@ public class EventsController {
     @ApiOperation("Gets details for a specific blog with the ID provided")
     @GetMapping(value = "blogs/{blogId}")
     public ResponseEntity<EventsVO> getEventDetails(@ApiParam(value = "blogId", example = "1")
-                                                    @PathVariable int blogId)  {
+                                                    @PathVariable int blogId) throws Exception {
         log.info("EventsController :: Getting list of all blogs");
         EventsVO newEvent= eventsService.getEventDetails(blogId);
         log.info("EventsController :: getAllEvents() -> Returning response {}", newEvent);
@@ -61,11 +61,12 @@ public class EventsController {
            @ApiParam(value = "searchParam", example = "Event Name")
            @RequestParam(name = "searchParam", required = false) String searchParam,
            @ApiParam(value = "citySearchParam", example = "Richardson")
-           @RequestParam(name = "city", required = false) String citySearchParam
+           @RequestParam(name = "city", required = false) String citySearchParam,
+           @ApiParam(name = "sortBy") @RequestParam(value = "sortBy", required = false) String sortParam
     ) {
         log.info("EventsController :: Getting filtered results for search param: {}", searchParam);
         List<EventsVO> eventList;
-            eventList = eventsService.getFilteredEvents(searchParam, citySearchParam);
+            eventList = eventsService.getFilteredEvents(searchParam, citySearchParam, sortParam);
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 

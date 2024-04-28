@@ -28,8 +28,21 @@ public class EventsQueries {
             "#{eventDonation.expiryDate}, #{eventDonation.amount})";
 
     public final static String GET_FILTERED_EVENTS =
+            "<script> \n" +
             "SELECT * from events where \n" +
                     "case when title like '%${searchParam}%' and city like '%${citySearchParam}%' then 1 \n" +
                     "when author like '%${searchParam}%' and city like '%${citySearchParam}%' then 1 \n" +
-                    "else 0 end = 1 and event_status = 'A'";
+                    "else 0 end = 1 and event_status = 'A' \n " +
+                    "<if test='sortParam != \"none\"'>ORDER BY ${sortParam} DESC</if>\n" +
+                    "</script>";
+
+    public final static String GET_ORGANIZATION_EXCLUSIVE_EVENTS = "SELECT * FROM EVENTS WHERE code = #{organizationCode}\n" +
+            "and event_status = 'A'";
+
+    public final static String INCREMENT_EVENT_COUNT_BY_ID = "UPDATE events SET view_count = view_count + 1\n" +
+            "where id = #{id}";
+
+    public final static String GET_TOTAL_DONATIONS_BY_EVENT_ID = "SELECT COALESCE(SUM(donation_amount), 0) from donations where \n" +
+            "event_id = #{event_id}";
+
 }

@@ -38,6 +38,12 @@ public class EventsDaoImpl implements IEventsDao {
     }
 
     @Override
+    public List<EventsVO> getExclusiveEvents(String organizationCode) {
+        log.info("EventsDaoImpl :: Fetching events from mapper based on org code: {}", organizationCode);
+        return eventsMapper.getExclusiveEvents(organizationCode);
+    }
+
+    @Override
     public boolean deleteEvent(int id) {
         log.info("EventsDaoImpl :: Deleting event id: {}", id);
         int rowsAffected = eventsMapper.deleteEvent(id);
@@ -45,8 +51,8 @@ public class EventsDaoImpl implements IEventsDao {
     }
 
     @Override
-    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam) {
-        return eventsMapper.getFilteredEvents(searchParam, citySearchParam);
+    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam, String sortParam) {
+        return eventsMapper.getFilteredEvents(searchParam, citySearchParam, sortParam);
     }
 
     @Override
@@ -54,5 +60,16 @@ public class EventsDaoImpl implements IEventsDao {
 
         int rowsAffected = eventsMapper.transactDonation(eventDonation, id);
         return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean incrementViewCountById(int id) {
+        int rowsAffected = eventsMapper.incrementEventCountById(id);
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public int getTotalDonationsBasedOnEventId(int id) {
+        return eventsMapper.getTotalDonationsBasedOnEventId(id);
     }
 }

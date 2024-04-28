@@ -20,5 +20,7 @@ public class EventsVO {
     private String email;
     private int id;
     private String city;
+    private String code;
+    private int donationAmount;
 
 }
