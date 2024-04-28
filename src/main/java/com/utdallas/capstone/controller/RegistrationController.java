@@ -1,17 +1,12 @@
 package com.utdallas.capstone.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.impl.JWTParser;
 import com.utdallas.capstone.props.CapstoneEnvironmentProp;
 import com.utdallas.capstone.service.IRegistrationService;
 import com.utdallas.capstone.vo.OrganizationVO;
-import io.jsonwebtoken.JwtParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
