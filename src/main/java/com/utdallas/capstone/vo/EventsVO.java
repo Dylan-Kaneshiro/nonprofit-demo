@@ -21,6 +21,7 @@ public class EventsVO {
     private int id;
     private String city;
     private String code;
+    @JsonProperty("funds")
     private int donationAmount;
 
 }

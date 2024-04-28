@@ -62,7 +62,7 @@ const BlogDetails = () => {
                     <p><strong>Phone: </strong> {blog.phone}</p>
                     <p><strong>Email: </strong> {blog.email}</p>
                     <br />
-                    <p><strong>Total funds raised: </strong> {blog.funds}</p>
+                    <p><strong>Total funds raised: </strong> {"$" + blog.funds}</p>
                     <div>{blog.body}</div>
                     <button onClick={handleClick}>delete</button>
                 </article>
