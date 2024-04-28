@@ -9,9 +9,9 @@ public interface IEventsDao {
     EventsVO getEventDetails(int id);
     boolean addEvent(EventsVO event);
     List<EventsVO> getEventList();
-    List<EventsVO> getEventsByName(String searchParam);
-    List<EventsVO> getEventsByOrganization(String searchParam);
     boolean deleteEvent(int id);
+
+    List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam);
 
     boolean transactDonation(EventDonationVO eventDonation, int id);
 

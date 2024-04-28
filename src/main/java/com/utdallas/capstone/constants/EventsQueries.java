@@ -19,10 +19,15 @@ public class EventsQueries {
     public final static String GET_EVENTS_BY_NAME = "SELECT * FROM EVENTS WHERE title LIKE '%${searchParam}%' " +
             "and event_status = 'A'";
 
-    public final static String GET_EVENTS_BY_ORGANIZATION = "SELECT * FROM EVENTS WHERE author LIKE '%${searchParam}%'";
+    public final static String GET_EVENTS_BY_ORGANIZATION = "SELECT * FROM EVENTS WHERE author LIKE '%${searchParam}%'" +
+            "and event_status = 'A'";
 
     public final static String RECORD_DONATION_BY_EVENT_ID = "INSERT INTO donations (event_id, card_number, " +
             "cardholder_name, cvv, expiration_date, donation_amount)\n" +
             "VALUES (#{id}, #{eventDonation.cardNumber}, #{eventDonation.cardHolder}, #{eventDonation.cvv},\n" +
             "#{eventDonation.expiryDate}, #{eventDonation.amount})";
+
+    public final static String GET_FILTERED_EVENTS =
+            "SELECT * FROM events where title like '%${searchParam}%' and " +
+            "city like '%${citySearchParam}%' and event_status = 'A'";
 }
