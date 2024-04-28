@@ -5,6 +5,8 @@ import com.utdallas.capstone.vo.OrganizationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RegistrationDaoImpl implements IRegistrationDao {
 
@@ -16,7 +18,13 @@ public class RegistrationDaoImpl implements IRegistrationDao {
         return registrationMapper.addNewOrganization(organization) > 0;
     }
 
+    @Override
     public String getOrganizationCodeByUserEmail(String userEmail) {
         return registrationMapper.getOrganizationCodeByUserEmail(userEmail);
+    }
+
+    @Override
+    public List<String> getAuthorizedUsers() {
+        return registrationMapper.getAuthorizedUsers();
     }
 }

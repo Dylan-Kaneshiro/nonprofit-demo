@@ -6,4 +6,6 @@ public interface IRegistrationService {
 
     boolean addNewOrganization(OrganizationVO organization);
     String getOrganizationCodeByUserEmail(String userEmail);
+
+    String getAuthorizationCookie(String userEmail);
 }

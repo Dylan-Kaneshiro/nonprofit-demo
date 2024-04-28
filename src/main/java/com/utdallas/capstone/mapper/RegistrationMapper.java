@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 import static com.utdallas.capstone.constants.RegistrationQueries.*;
 
 @Mapper
@@ -16,4 +18,7 @@ public interface RegistrationMapper {
 
     @Select(GET_ORGANIZATION_BY_EMAIL)
     String getOrganizationCodeByUserEmail(@Param("userEmail") String userEmail);
+
+    @Select(GET_AUTHORIZED_USER_EMAILS)
+    List<String> getAuthorizedUsers();
 }

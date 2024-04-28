@@ -41,4 +41,11 @@ public class RegistrationController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "auth/{userEmail}")
+    public ResponseEntity<String> getAuthorizedUserCookie(@PathVariable("userEmail") String userEmail) {
+        log.info("RegistrationContoller :: Getting the user authorization cookie for email: {}", userEmail);
+        String cookie = registrationService.getAuthorizationCookie(userEmail);
+        return new ResponseEntity<>(cookie, HttpStatus.OK);
+    }
 }
