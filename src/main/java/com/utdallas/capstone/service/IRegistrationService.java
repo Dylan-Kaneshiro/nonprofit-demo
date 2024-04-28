@@ -5,4 +5,5 @@ import com.utdallas.capstone.vo.OrganizationVO;
 public interface IRegistrationService {
 
     boolean addNewOrganization(OrganizationVO organization);
+    String getOrganizationCodeByUserEmail(String userEmail);
 }

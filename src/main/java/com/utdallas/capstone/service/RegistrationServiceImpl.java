@@ -19,4 +19,8 @@ public class RegistrationServiceImpl implements IRegistrationService {
         log.info("Calling RegistrationService to add new user to DB");
         return registrationDao.addNewOrganization(organization);
     }
+
+    public String getOrganizationCodeByUserEmail(String userEmail) {
+        return registrationDao.getOrganizationCodeByUserEmail(userEmail);
+    }
 }

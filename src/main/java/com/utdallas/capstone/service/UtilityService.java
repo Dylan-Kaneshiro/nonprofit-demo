@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 public class UtilityService {
 
     @Autowired
-    IRegistrationDao registrationDao;
+    IRegistrationService registrationService;
+
 
     public String getOrganizationCodeByUserEmail(String userEmail) {
         log.info("UtilityService :: Fetching organization code based on user email: {}", userEmail);
-        return registrationDao.getOrganizationCodeByUserEmail(userEmail);
+        return registrationService.getOrganizationCodeByUserEmail(userEmail);
     }
 }
