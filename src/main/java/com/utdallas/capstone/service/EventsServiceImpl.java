@@ -19,10 +19,13 @@ public class EventsServiceImpl implements IEventsService {
         this.eventsDao = eventsDao;
     }
     @Override
-    public EventsVO getEventDetails(int eventId) {
+    public EventsVO getEventDetails(int eventId) throws Exception {
         log.info("EventsServiceImpl :: Calling eventsDao to fetch event details");
         EventsVO eventDetails = eventsDao.getEventDetails(eventId);
         log.info("Returned event details from DB: {}", eventDetails);
+        // since the event details are viewed, we will increment the count by 1
+        this.incrementViewCountById(eventId);
+        eventDetails.setDonationAmount(this.fetchTotalDonationRecord(eventId));
         return eventDetails;
     }
 
@@ -45,8 +48,8 @@ public class EventsServiceImpl implements IEventsService {
     }
 
     @Override
-    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam) {
-        List<EventsVO> eventList = eventsDao.getFilteredEvents(searchParam, citySearchParam);
+    public List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam, String sortParam) {
+        List<EventsVO> eventList = eventsDao.getFilteredEvents(searchParam, citySearchParam, sortParam);
         if(!eventList.isEmpty()) {
             return eventList;
         }
@@ -57,5 +60,25 @@ public class EventsServiceImpl implements IEventsService {
     public boolean transactDonation(EventDonationVO eventDonation, int id) {
         log.info("Posting donation details for event ID: {} - {}", id, eventDonation);
         return eventsDao.transactDonation(eventDonation, id);
+    }
+
+    @Override
+    public List<EventsVO> getExclusiveEvents(String organizationCode) {
+        return eventsDao.getExclusiveEvents(organizationCode);
+    }
+
+    public void incrementViewCountById(int id) throws Exception {
+        boolean success = eventsDao.incrementViewCountById(id);
+        if(success) {
+            log.info("Incremented view count of eventId: {}", id);
+        } else {
+            log.error("There was a problem incrementing the event count of id: {}", id);
+            throw new Exception("Unable to increment event view count");
+        }
+    }
+
+    public int fetchTotalDonationRecord(int id) {
+        log.info("EventsService :: Fetching total donation amount for event id: {}", id);
+        return eventsDao.getTotalDonationsBasedOnEventId(id);
     }
 }
