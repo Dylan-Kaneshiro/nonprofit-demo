@@ -19,3 +19,10 @@ logging:
 
 server:
   port: 8086
+
+envconfig:
+  properties:
+    authorizedUsers: usmannaruhina@gmail.com,iusmankhalid7@gmail.com
+    clientSecret: O0EAAtiEvb6RJljSB0d8Krhf0so4DDriq69W8x0Ts8Mtr3Uc0dovo7cVdrB-5jL7
+
+

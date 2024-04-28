@@ -11,8 +11,13 @@ public interface IEventsDao {
     List<EventsVO> getEventList();
     boolean deleteEvent(int id);
 
-    List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam);
+    List<EventsVO> getFilteredEvents(String searchParam, String citySearchParam, String sortParam);
 
+    List<EventsVO> getExclusiveEvents(String organizationCode);
     boolean transactDonation(EventDonationVO eventDonation, int id);
+
+    boolean incrementViewCountById(int id);
+
+    int getTotalDonationsBasedOnEventId(int id);
 
 }
