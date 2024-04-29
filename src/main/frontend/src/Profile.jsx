@@ -3,21 +3,21 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
 import BlogList from "./BlogList";
+import useBlogs from "./Services/useBlogs";
+
+import { useAllowed } from "./util/useAllowed";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const {
-    error,
-    isPending,
-    data: blogs,
-  } = useFetch("http://localhost:8086/blogs/email=" + user.email);
-  console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
+  const {isAllowed} = useAllowed();
+  // const {
+  //   error,
+  //   isPending,
+  //   data: blogs,
+  // } = useFetch("http://localhost:8086/blogs/email=" + user.email);
+  // console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-
-  //Check if user is part of the database
+  const { error, isPending, data: blogs } = useBlogs("American", "");
 
   return (
     isAuthenticated && (
@@ -32,9 +32,26 @@ const Profile = () => {
           ))}
         </div>
         <div>
-          {/* <h2>My Blogs</h2> */}
-          {/* <button onClick={getUserPosts}>Get My Blogs</button> */}
-          { blogs ? (<BlogList blogs={blogs} title="History" />):(<div>Null...</div>)}
+          {isAllowed ? (
+            <div>
+              {blogs ? (
+                <BlogList blogs={blogs} title="History" />
+              ) : (
+                <div>Null...</div>
+              )}
+            </div>
+          ) : (
+            <div>
+              <h2>Unauthorized</h2>
+              <p>
+                You are not authorized to view this page. Please contact the
+                administrator.
+                contact to register as an organization
+              </p>
+              
+
+            </div>
+          )}
         </div>
       </div>
     )
