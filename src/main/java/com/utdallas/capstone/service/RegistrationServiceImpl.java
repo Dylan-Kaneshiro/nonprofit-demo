@@ -30,6 +30,9 @@ public class RegistrationServiceImpl implements IRegistrationService {
     public OrganizationVO getUserDetailsFromEmail(String userEmail) {
         log.info("RegistrationService :: Getting user information based on email: {}", userEmail);
         OrganizationVO organizationVO = registrationDao.getUserDetailsFromEmail(userEmail);
+        if(organizationVO == null) {
+            organizationVO = new OrganizationVO(userEmail, this.getAuthorizationCookie(userEmail));
+        }
         organizationVO.setAuthorizationCookie(this.getAuthorizationCookie(userEmail));
         return organizationVO;
     }
