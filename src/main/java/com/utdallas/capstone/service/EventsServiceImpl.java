@@ -3,7 +3,9 @@ package com.utdallas.capstone.service;
 import com.utdallas.capstone.dao.IEventsDao;
 import com.utdallas.capstone.vo.EventDonationVO;
 import com.utdallas.capstone.vo.EventsVO;
+import jdk.jshell.execution.Util;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class EventsServiceImpl implements IEventsService {
 
     private final IEventsDao eventsDao;
+    @Autowired
+    private UtilityService utilityService;
 
     public EventsServiceImpl(IEventsDao eventsDao) {
         this.eventsDao = eventsDao;
@@ -32,6 +36,7 @@ public class EventsServiceImpl implements IEventsService {
     @Override
     public boolean addEvent(EventsVO event) {
         log.info("EventsService -> Calling EventsDAO to add");
+        event.setOrganizationCode(utilityService.getOrganizationCodeByUserEmail(event.getEmail()));
         return eventsDao.addEvent(event);
 
     }
