@@ -1,6 +1,6 @@
 
 const createBlogURL = () => {
-    return 'http://localhost:8000/blogs'
+    return 'http://localhost:8086/blogs/add'
 }
 
 export default createBlogURL;

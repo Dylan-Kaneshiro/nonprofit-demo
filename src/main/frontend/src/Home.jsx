@@ -11,9 +11,10 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [tempCity, setTempCity] = useState("");
   const [city, setCity] = useState("");
+  const [sort, setSort] = useState('creation_date');
 
   // Directly use `useBlogs` with the searchTerm, initiating it with an empty string or a default value.
-  const { error, isPending, data: blogs } = useBlogs(searchTerm, city);
+  const { error, isPending, data: blogs } = useBlogs(searchTerm, city, sort);
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent form submission from reloading the page
     // No need to manually fetch or set state here; `useBlogs` handles it based on `searchTerm`.
@@ -44,7 +45,15 @@ const Home = () => {
         />
 
         <button class="search-button">Search</button>
+        
       </form>
+
+      <select className="sort-wrapper" value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="creation_date">Recent</option>
+          <option value="view_count">Popular</option>
+      </select>
+
+      
 
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
