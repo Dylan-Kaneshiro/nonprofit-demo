@@ -8,4 +8,6 @@ public interface IRegistrationService {
     String getOrganizationCodeByUserEmail(String userEmail);
 
     String getAuthorizationCookie(String userEmail);
+
+    OrganizationVO getUserDetailsFromEmail(String userEmail);
 }

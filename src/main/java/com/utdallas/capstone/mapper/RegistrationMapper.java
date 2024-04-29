@@ -1,10 +1,7 @@
 package com.utdallas.capstone.mapper;
 
 import com.utdallas.capstone.vo.OrganizationVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,4 +18,13 @@ public interface RegistrationMapper {
 
     @Select(GET_AUTHORIZED_USER_EMAILS)
     List<String> getAuthorizedUsers();
+
+    @Select(GET_USER_DETAILS_FROM_EMAIL)
+    @Results({
+            @Result(property = "code", column = "code"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "email", column = "email")
+})
+    OrganizationVO getUserDetailsFromEmail(@Param("userEmail") String userEmail);
+
 }

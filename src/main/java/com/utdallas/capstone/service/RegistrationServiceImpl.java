@@ -27,6 +27,14 @@ public class RegistrationServiceImpl implements IRegistrationService {
         return registrationDao.getOrganizationCodeByUserEmail(userEmail);
     }
 
+    public OrganizationVO getUserDetailsFromEmail(String userEmail) {
+        log.info("RegistrationService :: Getting user information based on email: {}", userEmail);
+        OrganizationVO organizationVO = registrationDao.getUserDetailsFromEmail(userEmail);
+        organizationVO.setAuthorizationCookie(this.getAuthorizationCookie(userEmail));
+        return organizationVO;
+    }
+
+
     @Override
     public String getAuthorizationCookie(String userEmail) {
         List<String> authorizedUserEmails = registrationDao.getAuthorizedUsers();

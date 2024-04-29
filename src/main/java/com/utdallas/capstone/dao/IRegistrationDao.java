@@ -9,4 +9,5 @@ public interface IRegistrationDao {
     boolean addNewOrganization(OrganizationVO organization);
     String getOrganizationCodeByUserEmail(String userEmail);
     List<String> getAuthorizedUsers();
+    OrganizationVO getUserDetailsFromEmail(String userEmail);
 }

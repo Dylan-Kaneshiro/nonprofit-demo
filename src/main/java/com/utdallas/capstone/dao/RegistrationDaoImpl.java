@@ -27,4 +27,9 @@ public class RegistrationDaoImpl implements IRegistrationDao {
     public List<String> getAuthorizedUsers() {
         return registrationMapper.getAuthorizedUsers();
     }
+
+    @Override
+    public OrganizationVO getUserDetailsFromEmail(String userEmail) {
+        return registrationMapper.getUserDetailsFromEmail(userEmail);
+    }
 }

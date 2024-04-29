@@ -10,5 +10,7 @@ public class RegistrationQueries {
 
     public final static String GET_AUTHORIZED_USER_EMAILS = "SELECT email from organizations";
 
+    public final static String GET_USER_DETAILS_FROM_EMAIL = "SELECT * from organizations where email = #{userEmail}";
+
     public RegistrationQueries() {}
 }
