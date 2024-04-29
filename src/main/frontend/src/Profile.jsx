@@ -3,7 +3,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
 import BlogList from "./BlogList";
-import useBlogs from "./Services/useBlogs";
+import useMyBlogs from "./Services/useMyBlogs";
 
 import { useAllowed } from "./util/useAllowed";
 
@@ -17,7 +17,7 @@ const Profile = () => {
   // } = useFetch("http://localhost:8086/blogs/email=" + user.email);
   // console.log("RETURNING BLOG DATA FROM COMPONENT", blogs);
 
-  const { error, isPending, data: blogs } = useBlogs("American", "");
+  const { error, isPending, data: blogs } = useMyBlogs(user.email);
 
   return (
     isAuthenticated && (
