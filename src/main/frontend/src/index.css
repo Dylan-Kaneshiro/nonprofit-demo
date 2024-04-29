@@ -147,7 +147,13 @@ img {
 
 /* blog details page */
 .blog-details {
-  padding: 50px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .blog-details h2 {
@@ -294,13 +300,22 @@ img {
 
 .user-profile {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100vh;
   width: 100vw;
   background-color: #f4f4f4;
   background-image: linear-gradient(to bottom right, #f4f4f4, #eaeaea);
   font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.user-profile .blog-history {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-left: 20px;
 }
 
 .card {

@@ -1,20 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
-import Cookies from "js-cookie";
 import { useAuth0 } from "@auth0/auth0-react";
+import {useAllowed} from './util/useAllowed';
+import Login from './components/Login';
+import Logout from './components/Logout';
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  // const toggle = () => setIsOpen(!isOpen);
 
-  const logoutWithRedirect = () =>
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    });
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  const {isAllowed} = useAllowed();
 
   return (
     <nav className="navbar">
@@ -27,18 +21,13 @@ const NavBar = () => {
 
           {isAuthenticated ? (
             <>
-              <Link to="/create">New Blog</Link>
-
+              {isAllowed ? <Link to="/create">Create New Blog</Link> : <></>}
               <Link to="/profile">Profile</Link>
-
-              <Link onClick={() => logoutWithRedirect()}>
-                Log out
-              </Link>
-
+              <Logout />
               <img src={user.picture} />
             </>
           ) : (
-            <Link onClick={() => loginWithRedirect()}>Log in</Link>
+            <Login />
           )}
         </ul>
       </div>
