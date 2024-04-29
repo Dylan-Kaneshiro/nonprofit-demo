@@ -32,7 +32,8 @@ const Authorize = () => {
         const checkUser = async () => {
             //get Y/N from backend
             const response = await fetch("http://localhost:8086/api/v1/auth/" + user.email);
-            const data = await response.json(); // parse the response body
+            const data = await response.text();
+            //response contains Y/N string
             console.log("DATA", data);            
             if (response.status === 200) {
                 Cookies.set("isAllowed", "true" , { expires: 1, sameSite: "strict", secure: true});
