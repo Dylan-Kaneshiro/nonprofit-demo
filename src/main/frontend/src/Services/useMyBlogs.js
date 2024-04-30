@@ -2,7 +2,7 @@ import useFetch from "../useFetch";
 
 const useMyBlogs = (email) => {
   return useFetch(
-    `http://localhost:8086/blogs?email=${email}`
+    `http://localhost:8000/blogs`
   );
 };
 

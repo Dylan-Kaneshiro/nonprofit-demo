@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
-import BlogList from "./BlogList";
+import MyBlogList from "./MyBlogList";
 import useMyBlogs from "./Services/useMyBlogs";
 
 import { useAllowed } from "./util/useAllowed";
@@ -35,7 +35,7 @@ const Profile = () => {
           {isAllowed ? (
             <div>
               {blogs ? (
-                <BlogList blogs={blogs} title="History" />
+                <MyBlogList blogs={blogs} />
               ) : (
                 <div>Null...</div>
               )}
