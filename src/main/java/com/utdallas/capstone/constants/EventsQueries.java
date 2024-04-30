@@ -7,8 +7,8 @@ public class EventsQueries {
             "id = #{id} AND event_status = 'A'";
 
     public final static String ADD_EVENT = "INSERT INTO EVENTS \n" +
-            "(title, description, phone, author, address, email, event_status)\n" +
-            "VALUES (#{title}, #{description}, #{phone}, #{author}, #{address}, #{email}, 'A')";
+            "(title, description, phone, author, address, city, email, code, event_status)\n" +
+            "VALUES (#{title}, #{description}, #{phone}, #{author}, #{address}, #{city}, #{email}, #{organizationCode}, 'A')";
 
     public final static String GET_EVENT_LIST = "SELECT id, title, author FROM EVENTS where event_status = 'A'";
 

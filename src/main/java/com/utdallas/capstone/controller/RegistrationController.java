@@ -31,7 +31,7 @@ public class RegistrationController {
             String errorMessage = "User " + userEmail + " is not authorized to add new organization";
             throw new Exception(errorMessage);
         }
-
+        log.info("RegistrationController :: User {} is granted access to enroll new organization", userEmail);
         registrationService.addNewOrganization(organization);
 
         return new ResponseEntity<>(HttpStatus.OK);
