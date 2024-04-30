@@ -157,7 +157,10 @@ img {
   border-radius: 15px;
   border-color: #8bca84;
 
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .my-blog-preview:hover {
   animation-name: bubble-expand;
@@ -182,6 +185,16 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.my-blog-preview button {
+  
+  background: #46923c;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* blog details page */

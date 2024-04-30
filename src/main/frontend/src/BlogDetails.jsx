@@ -142,7 +142,7 @@ const BlogDetails = () => {
           >
             delete
           </button> */}
-          <input
+          {/*<input
             type="checkbox"
             checked={blog.active}
             // onChange={handleToggleActive}
@@ -150,7 +150,7 @@ const BlogDetails = () => {
               cursor: "pointer",
             }}
           />
-          <label>{blog.active ? "Active" : "Inactive"}</label>
+          <label>{blog.active ? "Active" : "Inactive"}</label>*/}
         </article>
       )}
       {/* <div

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import deactivateURL from "./Services/deactivateURL";
+import activateURL from "./Services/activateURL";
 
 const MyBlogList = ({blogs}) => {
     
@@ -8,6 +9,13 @@ const MyBlogList = ({blogs}) => {
 
     const handleActiveBlog = (id) => {
         
+        fetch(activateURL(id), {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
+        }).then(() => {
+            console.log(`blog ${id} activated`);
+            navigate('/');
+        })
     };
 
     const handleInactiveBlog = (id) => {
