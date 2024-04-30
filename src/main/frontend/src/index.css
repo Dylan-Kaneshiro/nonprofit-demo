@@ -162,6 +162,35 @@ img {
   justify-content: space-evenly;
   align-items: center;
 }
+
+.my-blog-preview.active {
+  border-color: #8bca84;
+}
+
+.my-blog-preview.inactive {
+  border-color: #a1aeb1;
+}
+
+.my-blog-preview.active h2,
+.my-blog-preview.active p {
+  color: #46923c;
+}
+
+.my-blog-preview.inactive h2,
+.my-blog-preview.inactive p {
+  color: #a1aeb1;
+}
+
+.my-blog-preview.active button {
+  background: #46923c;
+  color: #fff;
+}
+
+.my-blog-preview.inactive button {
+  background: #a1aeb1;
+  color: #fff;
+}
+
 .my-blog-preview:hover {
   animation-name: bubble-expand;
   animation-duration: 1s;
@@ -170,27 +199,14 @@ img {
 
 .my-blog-preview h2 {
   font-size: 20px;
-  color: #46923c;
   text-align: center;
 }
 
 .my-blog-preview p {
-  color: #46923c;
   text-align: center;
 }
 
-.my-blog-preview a{
-  text-decoration: none;
-  height:100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
 .my-blog-preview button {
-  
-  background: #46923c;
-  color: #fff;
   border: 0;
   padding: 8px;
   border-radius: 8px;

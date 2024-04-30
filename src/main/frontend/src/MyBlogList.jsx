@@ -32,7 +32,7 @@ const MyBlogList = ({blogs}) => {
     return ( 
         <div className="blog-list"> 
             {blogs.map(blog => (
-                <div className="my-blog-preview" key={blog.id}>
+                <div className={`my-blog-preview ${blog.active === 'A' ? 'active' : 'inactive'}`} key={blog.id}>
 
                         <h2>{blog.title}</h2>
                         <p>{blog.city}</p>
