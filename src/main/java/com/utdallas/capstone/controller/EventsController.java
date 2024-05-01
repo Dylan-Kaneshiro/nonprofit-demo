@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.annotation.Repeatable;
 import java.util.List;
 @Api
 @RestController
@@ -76,6 +78,15 @@ public class EventsController {
         log.info("EventsController :: Donation recorded for event ID: {}", eventDonation.getBlogID());
         eventsService.transactDonation(eventDonation, eventDonation.getBlogID());
         return new ResponseEntity<>(eventDonation, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "API to reinstate an inactive event to active")
+    @PostMapping(value = "blogs/{id}/reactivate")
+    public ResponseEntity<String> reInstateEventToActive(
+            @PathVariable("id") int id) {
+        log.info("EventsController :: Reinstating event with id {} to active", id);
+        eventsService.reInstateEventToActive(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

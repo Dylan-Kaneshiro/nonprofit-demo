@@ -72,4 +72,10 @@ public class EventsDaoImpl implements IEventsDao {
     public int getTotalDonationsBasedOnEventId(int id) {
         return eventsMapper.getTotalDonationsBasedOnEventId(id);
     }
+
+    @Override
+    public boolean reInstateEventToActive(int id) {
+        int rowsAffected = eventsMapper.reInstateEventToActive(id);
+        return rowsAffected > 0;
+    }
 }

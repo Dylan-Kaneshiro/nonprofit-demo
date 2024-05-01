@@ -20,4 +20,6 @@ public interface IEventsDao {
 
     int getTotalDonationsBasedOnEventId(int id);
 
+    boolean reInstateEventToActive(int id);
+
 }
