@@ -10,7 +10,7 @@ const MyBlogList = ({blogs}) => {
     const handleActiveBlog = (id) => {
         
         fetch(activateURL(id), {
-            method: 'DELETE',
+            method: 'POST',
             headers: { "Content-Type": "application/json" },
         }).then(() => {
             console.log(`blog ${id} activated`);
