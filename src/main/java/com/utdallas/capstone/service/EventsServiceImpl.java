@@ -86,4 +86,9 @@ public class EventsServiceImpl implements IEventsService {
         log.info("EventsService :: Fetching total donation amount for event id: {}", id);
         return eventsDao.getTotalDonationsBasedOnEventId(id);
     }
+
+    public boolean reInstateEventToActive(int id) {
+        log.info("EventsService :: Updating DB to change event status to active");
+        return eventsDao.reInstateEventToActive(id);
+    }
 }

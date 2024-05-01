@@ -44,5 +44,6 @@ public class EventsQueries {
 
     public final static String GET_TOTAL_DONATIONS_BY_EVENT_ID = "SELECT COALESCE(SUM(donation_amount), 0) from donations where \n" +
             "event_id = #{event_id}";
+    public final static String SET_EVENT_STATUS_TO_ACTIVE = "UPDATE events SET event_status = 'A' where id = #{id}";
 
 }

@@ -19,6 +19,7 @@ public interface IEventsService {
 
     boolean addEvent(EventsVO event);
     boolean deleteEvent(int id);
+    boolean reInstateEventToActive(int id);
 
 
 }

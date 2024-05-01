@@ -33,8 +33,7 @@ public class RegistrationController {
         }
         log.info("RegistrationController :: User {} is granted access to enroll new organization", userEmail);
         registrationService.addNewOrganization(organization);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(organization, HttpStatus.OK);
     }
 
     @GetMapping(value = "auth/{userEmail}")

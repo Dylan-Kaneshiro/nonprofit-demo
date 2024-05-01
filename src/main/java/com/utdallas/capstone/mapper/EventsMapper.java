@@ -104,6 +104,9 @@ public interface EventsMapper {
     @Update(INCREMENT_EVENT_COUNT_BY_ID)
     int incrementEventCountById(@Param("id") int id);
 
+    @Update(SET_EVENT_STATUS_TO_ACTIVE)
+    int reInstateEventToActive(@Param("id") int id);
+
     @Insert(RECORD_DONATION_BY_EVENT_ID)
     int transactDonation(@Param("eventDonation") EventDonationVO eventDonation, @Param("id") int id);
 
