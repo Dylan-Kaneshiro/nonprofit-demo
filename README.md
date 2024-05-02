@@ -87,13 +87,13 @@ First, you need to clone the git repository to your local machine. You can do th
 $ git clone https://github.com/Dylan-Kaneshiro/nonprofit-demo.git
 ```
 
-### 2. Install SQL Server Drivers
+<!-- ### 2. Install SQL Server Drivers
 
 Next, download and install the Microsoft SQL Server Drivers. These are necessary for the application to connect to the SQL Server database. After downloading the drivers, add them to your classpath.
 
-You can download the drivers from the following link: [Microsoft SQL Server Drivers](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)
+You can download the drivers from the following link: [Microsoft SQL Server Drivers](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15) -->
 
-### 3. Install Maven Dependencies
+### 2. Install Maven Dependencies
 
 The project uses Maven to manage dependencies. To install the dependencies, run the following command in the root directory of the project:
 
@@ -106,9 +106,11 @@ $ mvn.cmd clean install
 
 This will download all the necessary dependencies and build the project.
 
-### 4. Run the Spring Boot Application
+### 3. Run the Spring Boot Application
 
 To run the Spring Boot application, run the following command in the root directory of the project:
+
+Note: Make sure to connect to CometNet before booting.
 
 ```bash
 //bash
@@ -119,7 +121,7 @@ $ mvn.cmd spring-boot:run
 
 This will start the application on the port (8086). Ensure that the port is not being used by another application.
 
-### 5. Build the Frontend
+### 4. Build the Frontend
 
 The frontend of the application is built using React. To build the frontend, open a new terminal window and navigate to the `src/main/frontend` directory. Then run the following command:
 
@@ -130,7 +132,7 @@ $ npm start
 
 This will build the frontend and start the development server. You can access the website at `http://localhost:3000`. Ensure that the port is not being used by another application.
 
-### 6. Access the Website
+### 5. Access the Website
 
 You can now access the website by navigating to `http://localhost:3000` in your browser. You should see the homepage of the application.
 
