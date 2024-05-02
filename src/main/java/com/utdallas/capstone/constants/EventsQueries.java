@@ -36,8 +36,7 @@ public class EventsQueries {
                     "<if test='sortParam != \"none\"'>ORDER BY ${sortParam} DESC</if>\n" +
                     "</script>";
 
-    public final static String GET_ORGANIZATION_EXCLUSIVE_EVENTS = "SELECT * FROM EVENTS WHERE code = #{organizationCode}\n" +
-            "and event_status = 'A'";
+    public final static String GET_ORGANIZATION_EXCLUSIVE_EVENTS = "SELECT * FROM EVENTS WHERE code = #{organizationCode}";
 
     public final static String INCREMENT_EVENT_COUNT_BY_ID = "UPDATE events SET view_count = view_count + 1\n" +
             "where id = #{id}";
