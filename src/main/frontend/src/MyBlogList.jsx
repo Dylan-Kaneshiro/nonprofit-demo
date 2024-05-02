@@ -32,11 +32,11 @@ const MyBlogList = ({blogs}) => {
     return ( 
         <div className="blog-list"> 
             {blogs.map(blog => (
-                <div className={`my-blog-preview ${blog.active === 'A' ? 'active' : 'inactive'}`} key={blog.id}>
+                <div className={`my-blog-preview ${blog.status === 'A' ? 'active' : 'inactive'}`} key={blog.id}>
 
                         <h2>{blog.title}</h2>
                         <p>{blog.city}</p>
-                        {blog.active === 'A' ? (
+                        {blog.status === 'A' ? (
                             <button onClick={() => handleInactiveBlog(blog.id)}>
                                 Close Event
                             </button>
