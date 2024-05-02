@@ -92,7 +92,8 @@ public interface EventsMapper {
             @Result(property = "email", column = "email"),
             @Result(property = "id", column = "id"),
             @Result(property = "city", column = "city"),
-            @Result(property = "code", column = "code")
+            @Result(property = "code", column = "code"),
+            @Result(property = "status", column = "event_status")
     })
     List<EventsVO> getExclusiveEvents(@Param("organizationCode") String organizationCode);
 

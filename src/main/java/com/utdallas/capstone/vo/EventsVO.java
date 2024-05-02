@@ -24,5 +24,6 @@ public class EventsVO {
     @JsonProperty("funds")
     private int donationAmount;
     private String organizationCode;
+    private String status;
 
 }
